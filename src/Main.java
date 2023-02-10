@@ -33,8 +33,10 @@ public class Main {
             return;
         }
 
+        boolean isNext;
         System.out.println("Currently playing: ");
         System.out.println(itr.next());
+        isNext = true;
 
         Scanner sc = new Scanner(System.in);
 
@@ -46,6 +48,10 @@ public class Main {
             switch(choice){
 
                 case 1:
+                    if(!isNext){
+                        itr.next();
+                        isNext = true;
+                    }
                     if(itr.hasNext()){
                         System.out.println("Now playing");
                         System.out.println(itr.next());
@@ -53,6 +59,10 @@ public class Main {
                     else System.out.println("You have reached the end of list");
                     break;
                 case 2:
+                    if(isNext){
+                        itr.previous();
+                        isNext = false;
+                    }
                     if(itr.hasPrevious()){
                         System.out.println("Now playing");
                         System.out.println(itr.previous());
@@ -60,6 +70,18 @@ public class Main {
                     else System.out.println("You are on first song already");
                     break;
                 case 3:
+                    if(isNext==true){
+                        if(itr.hasPrevious()) {
+                            System.out.println(itr.previous());
+                            isNext = false;
+                        }
+                    }
+                    else{
+                        if(itr.hasNext()){
+                            System.out.println(itr.next());
+                            isNext = true;
+                        }
+                    }
                     break;
                 case 4:
                     break;
